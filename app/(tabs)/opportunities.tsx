@@ -11,11 +11,11 @@ const styles = StyleSheet.create({
 });
 
 const OpportunitiesScreen = () => {
-    return (
-        <ThemedView style={styles.container}>
-          <ThemedText>Welcome to the opportunities page</ThemedText>
-        </ThemedView>
-    )
+  return (
+    <ThemedView style={styles.container}>
+      <ThemedText>Welcome to the opportunities page</ThemedText>
+    </ThemedView>
+  )
 }
 
 export default OpportunitiesScreen;

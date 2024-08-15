@@ -1,8 +1,13 @@
+import "../design-setup";
 import SplashScreen from '@/components/splash-screen/splash-screen';
 import { useEffect, useState } from 'react';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import useColorTheme from '@/hooks/use-color-theme';
+import useColorTheme from '@/utils/use-color-theme';
 import { Stack } from 'expo-router';
+import configureDesignSystem from '@/utils/configure-design-system';
+
+// Setup RNUILib Design System
+configureDesignSystem();
 
 const RootLayout = () => {
   const [isReady, setIsReady] = useState(false);
@@ -19,6 +24,7 @@ const RootLayout = () => {
         isReady
         &&
         <Stack>
+          <Stack.Screen name='index' options={{ headerShown: false, }} />
           <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
           <Stack.Screen name='+not-found' />
         </Stack>

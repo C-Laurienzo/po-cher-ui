@@ -3,11 +3,11 @@ import ThemedView from "@/components/common/themed-view"
 import { StyleSheet } from "react-native"
 
 const ProfileScreen = () => {
-    return (
-        <ThemedView style={styles.container}>
-          <ThemedText>Welcome to the profile page</ThemedText>
-        </ThemedView>
-    )
+  return (
+    <ThemedView style={styles.container}>
+      <ThemedText>Welcome to the profile page</ThemedText>
+    </ThemedView>
+  )
 }
 
 const styles = StyleSheet.create({
