@@ -1,6 +1,14 @@
-import { Assets, Colors, ThemeManager } from "react-native-ui-lib";
+import { Assets, Colors, ThemeManager, Typography } from "react-native-ui-lib";
 
 const configureDesignSystem = () => {
+    Typography.loadTypographies({
+        h1: {
+            fontSize: 32,
+            fontWeight: 'bold',
+            lineHeight: 32,
+        }
+    });
+
     ThemeManager.setComponentTheme('Button', {
         backgroundColor: Colors.$textDefault,
         linkColor: Colors.$textDefault,

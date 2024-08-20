@@ -1,19 +1,11 @@
-import ThemedText from "@/components/common/themed-text"
-import ThemedView from "@/components/common/themed-view"
-import { StyleSheet } from "react-native"
+import { Text, View } from "react-native-ui-lib"
 
 const ProfileScreen = () => {
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText>Welcome to the profile page</ThemedText>
-    </ThemedView>
+    <View flex center useSafeArea>
+      <Text>Welcome to the profile page!</Text>
+    </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-})
 
 export default ProfileScreen;
