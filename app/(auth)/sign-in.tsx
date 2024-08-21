@@ -1,7 +1,7 @@
 import PocherLabel from "@/components/pocher-label/pocher-label";
 import { router } from "expo-router";
 import { useState } from "react";
-import { Button, Text, TextField, View } from "react-native-ui-lib";
+import { Button, Colors, Text, TextField, View } from "react-native-ui-lib";
 
 const SignInScreen = () => {
   const [userName, setUserName] = useState('');
@@ -15,6 +15,7 @@ const SignInScreen = () => {
         flex
         floatingPlaceholder
         floatOnFocus
+        fieldStyle={{borderBottomColor: Colors.$textNeutral, borderBottomWidth: 1}}
         showClearButton
         enableErrors
         validate={['email', 'required']}
@@ -28,6 +29,7 @@ const SignInScreen = () => {
         flex
         floatingPlaceholder
         floatOnFocus
+        fieldStyle={{borderBottomColor: Colors.$textNeutral, borderBottomWidth: 1}}
         secureTextEntry
         showClearButton
         enableErrors
@@ -40,7 +42,7 @@ const SignInScreen = () => {
       />
       <View marginT-30 row>
         <Button marginR-10 label={'Sign In'} onPress={() => router.push('(tabs)/opportunities')} />
-        <Button marginL-10 label={'Create Account'} />
+        <Button marginL-10 label={'Create Account'} onPress={() => router.push('create-account/personal-information')}/>
       </View>
       <Button marginT-10 label={'Forgot password'} link onPress={() => router.push('(auth)/forgot-my-password')} labelProps={{underline: true}} />
       <Button marginT-10 label={'I just feel like perusing'} link onPress={() => router.push('(tabs)/opportunities')} labelProps={{underline: true}} />
