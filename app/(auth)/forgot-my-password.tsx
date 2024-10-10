@@ -49,7 +49,7 @@ const ForgotMyPasswordScreen = () => {
                             fieldStyle={{ borderBottomColor: Colors.$textNeutral, borderBottomWidth: 1 }}
                             showClearButton
                             enableErrors
-                            validate={[(v: string) => emailSchema.isValidSync(v), 'required']}
+                            validate={[(v) => emailSchema.isValidSync(v), 'required']}
                             validationMessage={['Email is invalid', 'Email is required']}
                             validationMessagePosition={'bottom'}
                             validateOnBlur

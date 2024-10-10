@@ -31,7 +31,7 @@ const ContactInformationScreen = () => {
                             fieldStyle={{ borderBottomColor: Colors.$textNeutral, borderBottomWidth: 1 }}
                             showClearButton
                             enableErrors
-                            validate={[(v: string) => emailSchema.isValidSync(v), 'required']}
+                            validate={[(v) => emailSchema.isValidSync(v), 'required']}
                             validationMessage={['Email is invalid', 'Email is required']}
                             validationMessagePosition={'bottom'}
                             validateOnBlur
@@ -56,14 +56,14 @@ const ContactInformationScreen = () => {
                             floatOnFocus
                             floatingPlaceholder
                             enableErrors
-                            validate={[(p: string) => phoneNumberSchema.isValidSync(p), 'required']}
+                            validate={[(p) => phoneNumberSchema.isValidSync(p), 'required']}
                             validateOnBlur
                             validationMessage={['Phone number is invalid', 'Phone number is required']}
                             validationMessagePosition={'bottom'}
                             margin-20
                             onBlur={onBlur}
                             onChangeText={(p) => {
-                                dispatch({ type: 'update', field: 'phoneNumber', value: p });
+                                dispatch({ type: 'update', field: 'phoneNumber', value: `+1${p}` });
                                 onChange(p);
                             }}
                             value={value}

@@ -12,7 +12,7 @@ const client = (() => {
 
 client.interceptors.request.use(
     async (config: InternalAxiosRequestConfig) => { 
-        const accessToken = await Storage.getItem(StorageKeys.accessToken);
+        const accessToken = await Storage.getItem(StorageKeys.accessToken, true);
 
         if (accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`;
@@ -24,11 +24,8 @@ client.interceptors.request.use(
 )
 
 const request = async (options: AxiosRequestConfig) => {
-    const onSuccess = (response: AxiosResponse) => response.data;
-    const onError = (error: AxiosError) => Promise.reject({
-        message: error.message,
-        code: error.code,
-    });
+    const onSuccess = (response: AxiosResponse) => response;
+    const onError = (error: AxiosError) => Promise.reject(error);
 
     return client(options).then(onSuccess).catch(onError);
 }

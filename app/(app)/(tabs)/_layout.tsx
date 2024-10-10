@@ -4,7 +4,7 @@ import { Tabs } from 'expo-router';
 
 const TabLayout = () => {
     const theme = useTheme();
-
+    
     return (
         <Tabs
             screenOptions={{
@@ -12,7 +12,7 @@ const TabLayout = () => {
                 headerShown: false
             }}>
             <Tabs.Screen
-                name='opportunities'
+                name='(opportunities)/opportunities'
                 options={{
                     title: '',
                     tabBarIcon: ({ color }) => (
