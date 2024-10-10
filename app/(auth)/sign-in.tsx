@@ -1,17 +1,17 @@
 import PocherLabel from "@/components/pocher-label/pocher-label";
 import useUser from "@/hooks/user-context";
-import { signIn } from "@/utils/authorization";
 import { router } from "expo-router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Button, Colors, LoaderScreen, Text, TextField, View } from "react-native-ui-lib";
-import { useMutation } from "react-query";
+import { Button, Colors, Incubator, LoaderScreen, Text, TextField, View } from "react-native-ui-lib";
 import { yupResolver } from "@hookform/resolvers/yup"
 import { object } from "yup"
 import { emailSchema, passwordSchema } from "@/utils/validator-schema";
+import useAuth from "@/hooks/auth-context";
 
 const SignInScreen = () => {
   const [user, dispatch] = useUser();
+  const { useSignIn, setIsAuthenticated } = useAuth();
   const [password, setPassword] = useState('');
 
   const formSchema = object({
@@ -19,11 +19,7 @@ const SignInScreen = () => {
     password: passwordSchema
   })
 
-  const { mutate, isLoading } = useMutation({
-    mutationKey: ['SIGN_IN'],
-    mutationFn: () => signIn(user.email, password),
-    onSuccess: () => router.push('(tabs)/opportunities'),
-  });
+  const { mutate, isLoading, isError, reset } = useSignIn(setIsAuthenticated);
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -34,7 +30,7 @@ const SignInScreen = () => {
   });
 
   const signInClicked = () => {
-    mutate();
+    mutate({ password, email: user.email, phoneNumber: user.phoneNumber });
   }
 
   const createAccountClicked = () => {
@@ -60,7 +56,7 @@ const SignInScreen = () => {
             fieldStyle={{ borderBottomColor: Colors.$textNeutral, borderBottomWidth: 1 }}
             showClearButton
             enableErrors
-            validate={[(v: string) => emailSchema.isValidSync(v), 'required']}
+            validate={[(v) => emailSchema.isValidSync(v), 'required']}
             validationMessage={['Email is invalid', 'Email is required']}
             validationMessagePosition={'bottom'}
             validateOnBlur
@@ -85,8 +81,8 @@ const SignInScreen = () => {
             secureTextEntry
             showClearButton
             enableErrors
-            validate={['required', (v: string) => v.length >= 8]}
-            validationMessage={['Password is required', 'Password is too short']}
+            validate={['required', (p) => p ? p.length >= 8 : false, (p) => passwordSchema.isValidSync(p)]}
+            validationMessage={['Password is required', 'Password is too short', 'Password is invalid']}
             validationMessagePosition={'bottom'}
             validateOnBlur
             onBlur={onBlur}
@@ -106,6 +102,12 @@ const SignInScreen = () => {
         <Button marginL-10 label={'Create Account'} onPress={createAccountClicked} />
       </View>
       <Button marginT-10 label={'Forgot password'} link onPress={forgotPasswordClicked} labelProps={{ underline: true }} />
+      <Incubator.Toast
+        visible={isError}
+        message='Sign In Failed'
+        autoDismiss={5000}
+        onDismiss={reset}
+      />
     </View>
   )
 }

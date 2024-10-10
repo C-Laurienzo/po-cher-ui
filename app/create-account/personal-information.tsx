@@ -30,7 +30,7 @@ const PersonalInformationScreen = () => {
                             fieldStyle={{ borderBottomColor: Colors.$textNeutral, borderBottomWidth: 1 }}
                             floatOnFocus
                             floatingPlaceholder
-                            validate={[(v: string) => nameSchema.isValidSync(v)]}
+                            validate={[(v) => nameSchema.isValidSync(v)]}
                             validateOnBlur
                             validationMessage={['First name is required']}
                             validationMessagePosition={'bottom'}
@@ -54,7 +54,7 @@ const PersonalInformationScreen = () => {
                             fieldStyle={{ borderBottomColor: Colors.$textNeutral, borderBottomWidth: 1 }}
                             floatOnFocus
                             floatingPlaceholder
-                            validate={[(v: string) => nameSchema.isValidSync(v)]}
+                            validate={[(v) => nameSchema.isValidSync(v)]}
                             validateOnBlur
                             validationMessage={['Last name is required']}
                             validationMessagePosition={'bottom'}
